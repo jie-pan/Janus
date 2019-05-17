@@ -114,6 +114,8 @@ int main(int argc, char **argv) {
     if (header->ruleDataOffset)
         cout <<"Data section offset: "<<header->ruleDataOffset<<endl;
 
+
+    cout <<"Rule   block_address:(rule_id)pc reg0, reg1"<<endl;
     /* For mode 2 it is enough */
     if (mode == 2) return 1;
 
