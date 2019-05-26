@@ -270,7 +270,7 @@ bool iteratorAnalysis(Loop *loop)
     }
 
     //step 1: identify all possible loop iterators from phi variables
-    for (auto depVar: loop->phiVariables) {
+    for (auto depVar: loop->phiVariables) { // induction variable ---> iterator
         LOOPLOG("\t\tAnalysing candidate variable "<<depVar<<endl);
         Iterator it(depVar, loop);
         iterators[depVar] = it;

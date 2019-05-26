@@ -50,12 +50,12 @@ dependenceAnalysis(janus::Loop *loop)
 
         visitedPhi.clear();
         //conclude an expanded expression for the phi node
-        CyclicStatus status = buildCyclicExpr(phi->expr, NULL, NULL, loop, visitedPhi);
+        CyclicStatus status = buildCyclicExpr(phi->expr, NULL, NULL, loop, visitedPhi);// i=i+1???
 
         if (status == FoundCyclic) {
             //found cyclic expressions
-            loop->phiVariables.insert(phi);
-            loop->phiVars.insert(*(Variable *)phi);
+            loop->phiVariables.insert(phi);// panjie key, Induction variables (SSA form)
+            loop->phiVars.insert(*(Variable *)phi);// phi variables
         } else if (status == FoundConstPhi) {
             LOOPLOG("\t\t\t"<<phi<<" is fake dependence since its cyclic expression is empty!" <<endl);
             loop->constPhiVars.insert(phi);
