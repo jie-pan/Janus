@@ -78,7 +78,7 @@ variableAnalysis(janus::Loop *loop)
             for (auto vs : instr.inputs) {
                 if (vs->type == JVAR_MEMORY || vs->type == JVAR_POLYNOMIAL) {
                     //add base and index into initVars
-                    for (auto phi:vs->pred) {
+                    for (auto phi:vs->pred) {//more indirect, need pred
                         if (loop->isInitial(phi)) {
                             loop->initVars.insert(phi);
                         }

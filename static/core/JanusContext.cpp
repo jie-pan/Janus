@@ -86,11 +86,11 @@ void JanusContext::analyseLoop()
 
     /* Step 2: analyse loop relations within one procedure */
     for (auto &func : functions) {
-        func.analyseLoopRelations();
+        func.analyseLoopRelations();//find loop parent, sub-loop
     }
 
     /* Step 3: analyse loop relations across procedures */
-    analyseLoopAndFunctionRelations();
+    analyseLoopAndFunctionRelations();//set loop nestID
 
     /* Step 4: load profiling information */
     if (mode == JPROF) {
