@@ -251,7 +251,7 @@ static bool finalValueAnalysis(Loop *loop)
         }
 #endif
         if (miter)
-            getIteratorFinalValue(boundExpr, *miter);
+            getIteratorFinalValue(boundExpr, *miter);//[init,step, FinalValue]
     }
     return true;
 }
