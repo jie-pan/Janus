@@ -137,7 +137,9 @@ static bool finalValueAnalysis(Loop *loop)
             return false;
         }
         ExpandedExpr boundExpr = *cmpOP1 - *cmpOP2;
-        LOOPLOG("\t\tBound expr "<<boundExpr<<endl);
+        LOOPLOG("\t\tBound expr cmpOP1: "<<*cmpOP1<<endl);
+        LOOPLOG("\t\tBound expr cmpOP2: "<<*cmpOP2<<endl);
+        LOOPLOG("\t\tBound expr: "<<boundExpr<<endl);
 
         //check the both expressions, and link the condition with only one loop iterator
         for (auto &it : iterators) {
@@ -365,7 +367,7 @@ bool postIteratorAnalysis(janus::Loop *loop)
         miter->finalKind == Iterator::INTEGER) {
         miter->strideKind = Iterator::INTEGER;
         miter->stepKind = Iterator::CONSTANT_IMM;
-        miter->step = (miter->finalImm-miter->initImm) / miter->stride + 1;
+        miter->step = (miter->finalImm - miter->initImm) / miter->stride + 1;
         loop->staticIterCount = miter->step;
         LOOPLOG("\t\tTotal iteration count: "<<miter->step<<endl);
     } else if (miter->kind == Iterator::INDUCTION_IMM) {
@@ -624,6 +626,8 @@ std::ostream& janus::operator<<(std::ostream& out, const Iterator& iter)
     out <<"]";
     if (iter.loop)
         out <<"@L"<<dec<<iter.loop->id;
+
+    out <<" ([init:stride:final]@loopid)";
     return out;
 }
 

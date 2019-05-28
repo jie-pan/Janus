@@ -104,6 +104,7 @@ void print_var(JVar var)
 
 void print_profile(JVarProfile *profile)
 {
+    //printf("-var, op, stride, check, init--\n");
     if (profile->type == INDUCTION_PROFILE) {
         printf("Induction ");
         print_var(profile->var);

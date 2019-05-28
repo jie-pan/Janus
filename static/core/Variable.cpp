@@ -269,6 +269,9 @@ std::ostream& janus::operator<<(std::ostream& out, VarState& vs)
 std::ostream& janus::operator<<(std::ostream& out, JVarProfile &vp)
 {
     if (vp.type == INDUCTION_PROFILE) {
+
+        out<<"|Induction var, op, stride, check[value], init[value]|"<<endl<<"\t\t";
+
         out<<"Induction "<<(Variable)vp.var;
         if (vp.induction.op == UPDATE_ADD) out<<" add";
         else out <<" unknown";
@@ -277,6 +280,13 @@ std::ostream& janus::operator<<(std::ostream& out, JVarProfile &vp)
             out <<" no check";
         else
             out <<" check "<<(Variable)vp.induction.check;
+
+        if (vp.induction.init.type == JVAR_UNKOWN)
+            out <<" no init";
+        else {
+            out <<" init "<<vp.induction.init;
+        }
+
     }
     return out;
 }
