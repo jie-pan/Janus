@@ -37,7 +37,10 @@ int main(int argc, char **argv) {
     {
         char option = argv[1][1];
         switch(option) {
-            case 'a': mode = JANALYSIS; IF_VERBOSE(cout<<"Static analysis mode enabled"<<endl); break;
+            case 'a':
+                mode = JANALYSIS;
+                IF_VERBOSE(cout<<"Static analysis mode enabled"<<endl);
+                break;
             case 'c':
                 if (argv[1][2] == 'f' && argv[1][3] == 'g') {
                     mode = JGRAPH;
@@ -59,7 +62,8 @@ int main(int argc, char **argv) {
             case 'l': 
                 if (argv[1][2] == 'c') {
                     mode = JLCOV;
-                    IF_VERBOSE(cout<<"Loop coverage profiling mode enabled"<<endl); break;
+                    IF_VERBOSE(cout<<"Loop coverage profiling mode enabled"<<endl);
+                    break;
                 }
                 else {
                     usage();
@@ -76,8 +80,14 @@ int main(int argc, char **argv) {
                     IF_VERBOSE(cout<<"Software prefetch mode enabled"<<endl);
                 }
                 break;
-            case 'v': mode = JVECTOR; IF_VERBOSE(cout<<"Loop vectorisation enabled"<<endl); break;
-            case 'o': mode = JOPT; IF_VERBOSE(cout<<"Binary optimiser mode enabled"<<endl); break;
+            case 'v':
+                mode = JVECTOR;
+                IF_VERBOSE(cout<<"Loop vectorisation enabled"<<endl);
+                break;
+            case 'o':
+                mode = JOPT;
+                IF_VERBOSE(cout<<"Binary optimiser mode enabled"<<endl);
+                break;
             default: {
                 usage();
                 return 1;
