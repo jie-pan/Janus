@@ -80,7 +80,7 @@ isVectorRuntimeCompatible(Loop &loop, set<InstOp> &supported_opcode, set<InstOp>
         BasicBlock &bb = entry[bid];
         for (int i=0; i<bb.size; i++) {
             Instruction &instr = bb.instrs[i];
-            if (instr.minstr->isXMMInstruction()) {
+            if (instr.minstr->isXMMInstruction()) {//all XMM && opcode && wordsize
                 foundVector = true;
                 //check supported opcode
                 if (supported_opcode.find(instr.minstr->opcode) == supported_opcode.end()) {

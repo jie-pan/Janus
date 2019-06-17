@@ -187,10 +187,10 @@ generateVectorRules(JanusContext *gc)
     set<Loop*> selected_loops;
 
     /* Step 0: set supported opcodes along with which are single precision and double precision */
-    setSupportedVectorOpcodes(supported_opcodes, singles, doubles);
+    setSupportedVectorOpcodes(supported_opcodes, singles, doubles);//fill sets
 
     /* Step 1: select loops for vectorisation based on the selected opcode */
-    selectVectorisableLoop(gc, selected_loops, supported_opcodes, singles, doubles);
+    selectVectorisableLoop(gc, selected_loops, supported_opcodes, singles, doubles);//fill selected_loops
 
     /* Step 2: generate rules for each loop */
     for (auto l: selected_loops) {
