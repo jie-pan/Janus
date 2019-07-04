@@ -111,7 +111,7 @@ vector_induction_update_handler(JANUS_CONTEXT)
             if (opnd_is_immed(opnd)) {
                 int opndimm = opnd_get_immed_int(opnd);
                 opndimm = opndimm * (vectorSize / originalVectorSize);
-                instr_set_src(trigger, i, OPND_CREATE_INT32(opndimm));
+                instr_set_src(trigger, i, OPND_CREATE_INT32(opndimm));//set trigger's ith src opnd
             }
         }
 #ifdef JANUS_VERBOSE
@@ -149,7 +149,7 @@ vector_loop_peel_handler(JANUS_CONTEXT)
     VECT_LOOP_PEEL_rule info = VECT_LOOP_PEEL_rule(*rule);
 
     // How many pre-iterations are required to align the main loop?
-    uint64_t iterations = info.iterCount % (vectorSize / info.vectorWordSize);
+    uint64_t iterations = info.iterCount % (vectorSize / info.vectorWordSize);// iterCount/vf, vf=128/32 for sse float
 
     if (iterations != 0) {
         instr_t *trigger = get_trigger_instruction(bb,rule);
@@ -159,13 +159,13 @@ vector_loop_peel_handler(JANUS_CONTEXT)
         instrlist_t *body = get_loop_body(janus_context, trigger, startPC);
         // Remove jump and conditional.
         instr_t *instr1 = instrlist_last(body);
-        instr_t *instr2 = instr_get_prev(instr1);
+        instr_t *instr2 = instr_get_prev(instr1);//rm last 2 instruction:cmp,jmp
         instrlist_remove(body, instr1);
         instrlist_remove(body, instr2);
 
         if (info.unusedReg == 0)
             // If no reg available, copy body multiple times.
-            insert_list_after(janus_context, body, trigger, iterations);
+            insert_list_after(janus_context, body, trigger, iterations);//iteratons=1 for sse->avx
         else
             // Insert loop before main loop if reg available for induction (after trigger).
             insert_loop_after(janus_context, &info, body, trigger, iterations);
