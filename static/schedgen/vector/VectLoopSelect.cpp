@@ -13,7 +13,7 @@ setSupportedVectorOpcodes(set<InstOp> &supported_opcodes, set<InstOp> &singles, 
 {
 #ifdef JANUS_X86
     //Single precision
-    singles.insert(X86_INS_MOVAPS);//sse-avx
+    singles.insert(X86_INS_MOVAPS);//5 instruction need sse->avx convertion:+-x/mov
     singles.insert(X86_INS_ADDPS);
     singles.insert(X86_INS_SUBPS);
     singles.insert(X86_INS_MULPS);

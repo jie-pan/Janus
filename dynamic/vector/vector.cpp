@@ -17,7 +17,7 @@ dr_init(client_id_t id)
     dr_fprintf(STDOUT,"---------------------------------------------------------------\n\n");
 #endif
     /* Register event callbacks. */
-    dr_register_bb_event(event_basic_block);
+    dr_register_bb_event(event_basic_block);//callback entry
 
     /* Initialise JANUS components */
     janus_init(id);
@@ -89,6 +89,7 @@ event_basic_block(void *drcontext, void *tag, instrlist_t *bb, bool for_trace, b
             case VECT_BROADCAST:
                 vector_broadcast_handler(janus_context);
                 break;
+            /* debug
             case PARA_LOOP_INIT:
                 vector_loop_init(janus_context);
                 break;
@@ -101,6 +102,7 @@ event_basic_block(void *drcontext, void *tag, instrlist_t *bb, bool for_trace, b
             case PARA_OUTER_LOOP_END:
                 vector_loop_finish(janus_context);
                 break;
+                */
             #ifdef FIX
             case VECT_FORCE_SSE:
                 break;

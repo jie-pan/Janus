@@ -187,10 +187,13 @@ void vector_extend_handler(JANUS_CONTEXT)
     opnd_t dst = instr_get_dst(trigger, 0);
     opnd_t src1 = instr_get_src(trigger, 0);
     VECT_CONVERT_rule info = VECT_CONVERT_rule(*rule);
+
+    //float +-*/, can't addps->vaddps
     if (opcode == OP_vaddss || opcode == OP_addss || opcode == OP_vsubss || opcode == OP_subss 
      || opcode == OP_vmulss || opcode == OP_mulss || opcode == OP_vdivss || opcode == OP_divss) {
         vector_extend_handler_arith(janus_context, &info, trigger, opcode, &dst, &src1, 4, vectorSize/4);
     }
+    //double +-*/
     else if (opcode == OP_vaddsd || opcode == OP_addsd || opcode == OP_vsubsd || opcode == OP_subsd
           || opcode == OP_vmulsd || opcode == OP_mulsd || opcode == OP_vdivsd || opcode == OP_divsd) {
         vector_extend_handler_arith(janus_context, &info, trigger, opcode, &dst, &src1, 8, vectorSize/8);
